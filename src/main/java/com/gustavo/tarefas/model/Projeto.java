@@ -3,6 +3,7 @@ package com.gustavo.tarefas.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "HTE_PROJETOS",
@@ -80,7 +81,10 @@ public class Projeto {
         this.id = id;
     }
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usuario_id", nullable = false)
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "projeto", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private Set<Tarefa> tarefas;
 }

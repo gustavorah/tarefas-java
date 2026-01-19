@@ -46,10 +46,18 @@ public class ProjetoService {
                 orElseThrow(() -> new RuntimeException("Projeto Inexistente"));
         Usuario usuario = usuarioRepository.findById(request.usuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário Inexistente"));
-        projetoExistente.setNome(request.nome());
-        projetoExistente.setDescricao(request.descricao());
-        projetoExistente.setDt_inicio(request.dt_inicio());
-        projetoExistente.setDt_fim(request.dt_fim());
+        if (request.nome() != null) {
+            projetoExistente.setNome(request.nome());
+        }
+        if (request.descricao() != null) {
+            projetoExistente.setDescricao(request.descricao());
+        }
+        if (request.dt_inicio() != null) {
+            projetoExistente.setDt_inicio(request.dt_inicio());
+        }
+        if (request.dt_fim() != null) {
+            projetoExistente.setDt_fim(request.dt_fim());
+        }
         projetoExistente.setUsuario(usuario);
         return repository.save(projetoExistente);
     }

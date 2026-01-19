@@ -26,9 +26,15 @@ public class UsuarioService {
 
     public Usuario atualizar(Long id, Usuario usuario) {
         Usuario usuarioExistente = repository.findById(id).orElseThrow(NoSuchElementException::new);
-        usuarioExistente.setNome(usuario.getNome());
-        usuarioExistente.setEmail(usuario.getEmail());
-        usuarioExistente.setSenha(usuario.getSenha());
+        if (usuario.getNome() != null) {
+            usuarioExistente.setNome(usuario.getNome());
+        }
+        if (usuario.getEmail() != null) {
+            usuarioExistente.setEmail(usuario.getEmail());
+        }
+        if (usuario.getSenha() != null) {
+            usuarioExistente.setSenha(usuario.getSenha());
+        }
         return repository.save(usuarioExistente);
     }
 
