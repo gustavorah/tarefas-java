@@ -1,7 +1,7 @@
 package com.gustavo.tarefas.controller;
 
 import com.gustavo.tarefas.model.Tarefa;
-import com.gustavo.tarefas.request.TarefaRequest;
+import com.gustavo.tarefas.request.TarefaDTO;
 import com.gustavo.tarefas.service.TarefaService;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +22,12 @@ public class TarefaController {
     }
 
     @PostMapping
-    public Tarefa criar(@RequestBody TarefaRequest tarefa) {
+    public Tarefa criar(@RequestBody TarefaDTO tarefa) {
         return service.criar(tarefa);
     }
 
     @PutMapping("/{id}")
-    public Tarefa atualizar(@PathVariable Long id, @RequestBody TarefaRequest tarefa) {
+    public Tarefa atualizar(@PathVariable Long id, @RequestBody TarefaDTO tarefa) {
         return service.atualizar(id,  tarefa);
     }
 

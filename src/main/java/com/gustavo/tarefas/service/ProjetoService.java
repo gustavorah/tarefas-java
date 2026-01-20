@@ -4,7 +4,7 @@ import com.gustavo.tarefas.model.Projeto;
 import com.gustavo.tarefas.model.Usuario;
 import com.gustavo.tarefas.repository.ProjetoRepository;
 import com.gustavo.tarefas.repository.UsuarioRepository;
-import com.gustavo.tarefas.request.ProjetoRequest;
+import com.gustavo.tarefas.request.ProjetoDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,7 +28,7 @@ public class ProjetoService {
         return repository.findAll();
     }
 
-    public Projeto criar(ProjetoRequest projetoRequest) {
+    public Projeto criar(ProjetoDTO projetoRequest) {
         Usuario usuario = usuarioRepository.findById(projetoRequest.usuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         Projeto projeto = new Projeto(
@@ -41,7 +41,7 @@ public class ProjetoService {
         return repository.save(projeto);
     }
 
-    public Projeto atualizar(Long id, ProjetoRequest request) {
+    public Projeto atualizar(Long id, ProjetoDTO request) {
         Projeto projetoExistente = repository.findById(id).
                 orElseThrow(() -> new RuntimeException("Projeto Inexistente"));
         Usuario usuario = usuarioRepository.findById(request.usuarioId())

@@ -4,7 +4,7 @@ import com.gustavo.tarefas.model.Projeto;
 import com.gustavo.tarefas.model.Tarefa;
 import com.gustavo.tarefas.repository.ProjetoRepository;
 import com.gustavo.tarefas.repository.TarefaRepository;
-import com.gustavo.tarefas.request.TarefaRequest;
+import com.gustavo.tarefas.request.TarefaDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +29,7 @@ public class TarefaService {
     }
 
     @Transactional
-    public Tarefa criar(TarefaRequest request) {
+    public Tarefa criar(TarefaDTO request) {
         Projeto projeto = projetoRepository.findById(request.projeto_id())
                 .orElseThrow(() -> new RuntimeException("Projeto Inexistente"));
         boolean status = request.status() != null ? request.status() : true;
@@ -47,7 +47,7 @@ public class TarefaService {
     }
 
     @Transactional
-    public Tarefa atualizar(Long id, TarefaRequest request) {
+    public Tarefa atualizar(Long id, TarefaDTO request) {
         Tarefa tarefaExistente = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Tarefa inexistente"));
 

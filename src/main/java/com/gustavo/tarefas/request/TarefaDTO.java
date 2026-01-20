@@ -2,7 +2,7 @@ package com.gustavo.tarefas.request;
 
 import java.time.LocalDateTime;
 
-public record TarefaRequest(
+public record TarefaDTO(
         String titulo,
         String descricao,
         Boolean status,

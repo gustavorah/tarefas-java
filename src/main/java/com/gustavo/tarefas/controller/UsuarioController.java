@@ -1,6 +1,8 @@
 package com.gustavo.tarefas.controller;
 
 import com.gustavo.tarefas.model.Usuario;
+import com.gustavo.tarefas.request.UsuarioDTO;
+import com.gustavo.tarefas.response.UsuarioResponseDTO;
 import com.gustavo.tarefas.service.UsuarioService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +17,13 @@ public class UsuarioController {
         this.service = service;
     }
 
-    @GetMapping("/{email}")
-    public Usuario findUsuarioByEmail(@PathVariable String email) {
-        return service.findUsuarioByEmail(email);
+    @GetMapping("/buscar")
+    public UsuarioResponseDTO findBy(UsuarioDTO usuario) {
+        return service.findBy(usuario);
     }
 
     @GetMapping
-    public List<Usuario> listar() {
+    public List<UsuarioResponseDTO> listar() {
         return service.listarTodos();
     }
 
