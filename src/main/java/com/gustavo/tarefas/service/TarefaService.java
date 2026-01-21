@@ -1,10 +1,12 @@
 package com.gustavo.tarefas.service;
 
+import com.gustavo.tarefas.mapper.TarefaMapper;
 import com.gustavo.tarefas.model.Projeto;
 import com.gustavo.tarefas.model.Tarefa;
 import com.gustavo.tarefas.repository.ProjetoRepository;
 import com.gustavo.tarefas.repository.TarefaRepository;
 import com.gustavo.tarefas.request.TarefaDTO;
+import com.gustavo.tarefas.response.TarefaResponseDTO;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +16,24 @@ import java.util.List;
 public class TarefaService {
     final private TarefaRepository repository;
     final private ProjetoRepository projetoRepository;
+    final private TarefaMapper mapper;
 
     public TarefaService(
             TarefaRepository repository,
-            ProjetoRepository projetoRepository
+            ProjetoRepository projetoRepository,
+            TarefaMapper mapper
     ) {
         this.repository = repository;
         this.projetoRepository = projetoRepository;
+        this.mapper = mapper;
     }
 
     @Transactional
-    public List<Tarefa> listarTodos() {
-        return repository.findAll();
+    public List<TarefaResponseDTO> listarTodos() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::tarefaToTarefaResponseDTO)
+                .toList();
     }
 
     @Transactional

@@ -3,8 +3,7 @@ package com.gustavo.tarefas.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.Set;
@@ -12,8 +11,11 @@ import java.util.Set;
 @Entity
 @Table(name = "HTE_PROJETOS",
 schema = "APP_TAREFAS")
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Projeto {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_projeto")
     private Long id;

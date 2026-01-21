@@ -2,6 +2,7 @@ package com.gustavo.tarefas.controller;
 
 import com.gustavo.tarefas.model.Tarefa;
 import com.gustavo.tarefas.request.TarefaDTO;
+import com.gustavo.tarefas.response.TarefaResponseDTO;
 import com.gustavo.tarefas.service.TarefaService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class TarefaController {
     }
 
     @GetMapping
-    public List<Tarefa> listarTarefas() {
+    public List<TarefaResponseDTO> listarTarefas() {
         return service.listarTodos();
     }
 

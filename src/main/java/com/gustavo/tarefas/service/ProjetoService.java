@@ -1,10 +1,12 @@
 package com.gustavo.tarefas.service;
 
+import com.gustavo.tarefas.mapper.ProjetoMapper;
 import com.gustavo.tarefas.model.Projeto;
 import com.gustavo.tarefas.model.Usuario;
 import com.gustavo.tarefas.repository.ProjetoRepository;
 import com.gustavo.tarefas.repository.UsuarioRepository;
 import com.gustavo.tarefas.request.ProjetoDTO;
+import com.gustavo.tarefas.response.ProjetoResponseDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,21 +16,27 @@ import java.util.NoSuchElementException;
 public class ProjetoService {
     final private ProjetoRepository repository;
     final private UsuarioRepository usuarioRepository;
+    final private ProjetoMapper mapper;
 
     public ProjetoService(
             ProjetoRepository repository,
-            UsuarioRepository usuarioRepository
+            UsuarioRepository usuarioRepository,
+            ProjetoMapper mapper
     )
     {
         this.repository = repository;
         this.usuarioRepository = usuarioRepository;
+        this.mapper = mapper;
     }
 
-    public List<Projeto> listarTodos() {
-        return repository.findAll();
+    public List<ProjetoResponseDTO> listarTodos() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::projetoToProjetoDTOResponse)
+                .toList();
     }
 
-    public Projeto criar(ProjetoDTO projetoRequest) {
+    public ProjetoResponseDTO criar(ProjetoDTO projetoRequest) {
         Usuario usuario = usuarioRepository.findById(projetoRequest.usuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
         Projeto projeto = new Projeto(
@@ -38,10 +46,11 @@ public class ProjetoService {
                 projetoRequest.dt_fim(),
                 usuario
         );
-        return repository.save(projeto);
+        projeto = repository.save(projeto);
+        return mapper.projetoToProjetoDTOResponse(projeto);
     }
 
-    public Projeto atualizar(Long id, ProjetoDTO request) {
+    public ProjetoResponseDTO atualizar(Long id, ProjetoDTO request) {
         Projeto projetoExistente = repository.findById(id).
                 orElseThrow(() -> new RuntimeException("Projeto Inexistente"));
         Usuario usuario = usuarioRepository.findById(request.usuarioId())
@@ -59,7 +68,8 @@ public class ProjetoService {
             projetoExistente.setDt_fim(request.dt_fim());
         }
         projetoExistente.setUsuario(usuario);
-        return repository.save(projetoExistente);
+        projetoExistente = repository.save(projetoExistente);
+        return mapper.projetoToProjetoDTOResponse(projetoExistente);
     }
 
     public void deletar(Long id) {

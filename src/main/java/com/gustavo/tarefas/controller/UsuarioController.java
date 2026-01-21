@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/usuarios")
+@CrossOrigin(origins = "http://localhost:4040")
 public class UsuarioController {
     final private UsuarioService service;
 
@@ -28,12 +29,12 @@ public class UsuarioController {
     }
 
     @PostMapping
-    public Usuario criar(Usuario usuario) {
+    public UsuarioResponseDTO criar(Usuario usuario) {
         return service.criar(usuario);
     }
 
     @PutMapping("/{id}")
-    public Usuario atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
+    public UsuarioResponseDTO atualizar(@PathVariable Long id, @RequestBody Usuario usuario) {
         return service.atualizar(id, usuario);
     }
 

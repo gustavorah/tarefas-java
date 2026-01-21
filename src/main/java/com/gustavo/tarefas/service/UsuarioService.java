@@ -27,11 +27,12 @@ public class UsuarioService {
                 .toList();
     }
 
-    public Usuario criar(Usuario usuario) {
-        return repository.save(usuario);
+    public UsuarioResponseDTO criar(Usuario usuario) {
+        usuario = repository.save(usuario);
+        return mapper.usuarioToUsuarioResponseDTO(usuario);
     }
 
-    public Usuario atualizar(Long id, Usuario usuario) {
+    public UsuarioResponseDTO atualizar(Long id, Usuario usuario) {
         Usuario usuarioExistente = repository.findById(id).orElseThrow(NoSuchElementException::new);
         if (usuario.getNome() != null) {
             usuarioExistente.setNome(usuario.getNome());
@@ -42,7 +43,8 @@ public class UsuarioService {
         if (usuario.getSenha() != null) {
             usuarioExistente.setSenha(usuario.getSenha());
         }
-        return repository.save(usuarioExistente);
+        usuarioExistente = repository.save(usuarioExistente);
+        return mapper.usuarioToUsuarioResponseDTO(usuarioExistente);
     }
 
     public void deletar(Long id) {
@@ -57,8 +59,6 @@ public class UsuarioService {
         ) {
             throw new RuntimeException("Argumentos incorretos");
         }
-        System.out.println(usuario.nome());
-        System.out.println(usuario.email());
         Optional<Usuario> user = (usuario.nome() != null && usuario.email() != null) ?
             user = repository.findByNomeAndEmail(usuario.nome(), usuario.email())
                 : (usuario.nome() != null)

@@ -2,6 +2,7 @@ package com.gustavo.tarefas.controller;
 
 import com.gustavo.tarefas.model.Projeto;
 import com.gustavo.tarefas.request.ProjetoDTO;
+import com.gustavo.tarefas.response.ProjetoResponseDTO;
 import com.gustavo.tarefas.service.ProjetoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,19 +19,19 @@ public class ProjetoController {
     }
 
     @GetMapping
-    public List<Projeto> listarTodos()
+    public List<ProjetoResponseDTO> listarTodos()
     {
         return service.listarTodos();
     }
 
     @PostMapping
-    public Projeto criar(@RequestBody ProjetoDTO projeto)
+    public ProjetoResponseDTO criar(@RequestBody ProjetoDTO projeto)
     {
         return service.criar(projeto);
     }
 
     @PutMapping("/{id}")
-    public Projeto atualizar(@PathVariable Long id, @RequestBody ProjetoDTO request)
+    public ProjetoResponseDTO atualizar(@PathVariable Long id, @RequestBody ProjetoDTO request)
     {
         return service.atualizar(id, request);
     }
