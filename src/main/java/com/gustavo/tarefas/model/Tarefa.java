@@ -8,21 +8,26 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "HTE_TAREFAS",
+@Table(name = "TAREFAS",
 schema = "APP_TAREFAS")
 @Data
 @NoArgsConstructor
 public class Tarefa {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_tarefa")
+    @Column(name = "ID")
     private Long id;
-    @Column(nullable = false)
+    @Column(name = "TITULO", nullable = false)
     private String titulo;
+    @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(nullable = false)
+    @Column(name = "STATUS", nullable = false)
     private boolean status = true;
+    @Column(name = "PRIORIDADE")
     private String prioridade;
+    @Column(name = "DTCRIACAO")
     private LocalDateTime dtCriacao;
+    @Column(name = "DTFIM")
     private LocalDateTime dtFim;
 
     @ManyToOne

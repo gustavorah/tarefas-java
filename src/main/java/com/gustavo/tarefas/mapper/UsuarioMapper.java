@@ -16,7 +16,7 @@ public interface UsuarioMapper {
     @Mapping(target = "nome", source = "entity.nome")
     @Mapping(target = "email", source = "entity.email")
 //    @Mapping(target = "senha", source = "entity.senha")
-    @Mapping(target = "dt_criacao", source = "entity.dt_criacao")
+    @Mapping(target = "dtCriacao", source = "entity.dtCriacao")
     @Mapping(target = "projetos", source = "entity.projetos")
     UsuarioResponseDTO usuarioToUsuarioResponseDTO(Usuario entity);
 }

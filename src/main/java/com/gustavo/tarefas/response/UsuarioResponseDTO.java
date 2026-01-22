@@ -8,7 +8,7 @@ public record UsuarioResponseDTO (
         String nome,
         String email,
 //        String senha,
-        LocalDateTime dt_criacao,
+        LocalDateTime dtCriacao,
         Set<ProjetoResponseDTO> projetos
 ) {
 }

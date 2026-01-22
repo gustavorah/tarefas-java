@@ -42,8 +42,8 @@ public class ProjetoService {
         Projeto projeto = new Projeto(
                 projetoRequest.nome(),
                 projetoRequest.descricao(),
-                projetoRequest.dt_inicio(),
-                projetoRequest.dt_fim(),
+                projetoRequest.dtInicio(),
+                projetoRequest.dtFim(),
                 usuario
         );
         projeto = repository.save(projeto);
@@ -61,11 +61,11 @@ public class ProjetoService {
         if (request.descricao() != null) {
             projetoExistente.setDescricao(request.descricao());
         }
-        if (request.dt_inicio() != null) {
-            projetoExistente.setDt_inicio(request.dt_inicio());
+        if (request.dtInicio() != null) {
+            projetoExistente.setDtInicio(request.dtInicio());
         }
-        if (request.dt_fim() != null) {
-            projetoExistente.setDt_fim(request.dt_fim());
+        if (request.dtFim() != null) {
+            projetoExistente.setDtFim(request.dtFim());
         }
         projetoExistente.setUsuario(usuario);
         projetoExistente = repository.save(projetoExistente);

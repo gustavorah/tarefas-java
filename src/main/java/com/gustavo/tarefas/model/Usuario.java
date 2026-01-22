@@ -11,19 +11,21 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(name = "HTE_USUARIOS",
+@Table(name = "USUARIOS",
     schema = "APP_TAREFAS")
 public class Usuario {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_usuario")
+    @Column(name = "ID")
     private Long id;
-    @Column(nullable = false)
+    @Column(name = "NOME", nullable = false)
     private String nome;
-    @Column(unique = true, nullable = false)
+    @Column(name = "EMAIL", unique = true, nullable = false)
     private String email;
-    @Column(nullable = false)
+    @Column(name = "SENHA", nullable = false)
     private String senha;
+    @Column(name = "DTCRIACAO")
     @CreationTimestamp
-    private LocalDateTime dt_criacao;
+    private LocalDateTime dtCriacao;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.PERSIST)
     @JsonManagedReference

@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001
+      author: Gustavo Rahmeier
+      changes:
+        - createTable:
+            tableName: USUARIOS
+            columns:
+              - column:
+                  name: ID
+                  type: number
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: DTCRIACAO
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: EMAIL
+                  type: varchar2(255)
+                  constraints:
+                    unique: true
+                    nullable: false
+              - column:
+                  name: NOME
+                  type: varchar2(255)
+                  constraints:
+                    nullable: false
+      rollback:
+        - dropTable:
+            tableName: USUARIOS
+
+

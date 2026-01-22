@@ -10,7 +10,7 @@ public interface ProjetoMapper {
     @Mapping(target = "id", source = "entity.id")
     @Mapping(target = "nome", source = "entity.nome")
     @Mapping(target = "descricao", source = "entity.descricao")
-    @Mapping(target = "dtInicio", source = "entity.dt_inicio")
-    @Mapping(target = "dtFim", source = "entity.dt_fim")
+    @Mapping(target = "dtInicio", source = "entity.dtInicio")
+    @Mapping(target = "dtFim", source = "entity.dtFim")
     ProjetoResponseDTO projetoToProjetoDTOResponse(Projeto entity);
 }

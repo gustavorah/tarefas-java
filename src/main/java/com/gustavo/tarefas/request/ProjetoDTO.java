@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 public record ProjetoDTO(
         String nome,
         String descricao,
-        LocalDateTime dt_inicio,
-        LocalDateTime dt_fim,
+        LocalDateTime dtInicio,
+        LocalDateTime dtFim,
         Long usuarioId
 ) {
 }

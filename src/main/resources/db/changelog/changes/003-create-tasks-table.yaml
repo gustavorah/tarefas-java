@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003
+      author: Gustavo Rahmeier
+      changes:
+        - createTable:
+            tableName: TAREFAS
+            columns:
+              - column:
+                  name: ID
+                  type: number
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: TITULO
+                  type: varchar2(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DESCRICAO
+                  type: varchar2(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: DTCRIACAO
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: DTFIM
+                  type: timestamp
+                  constraints:
+                    nullable: true
+              - column:
+                  name: PRIORIDADE
+                  type: varchar2(255)
+                  constraints:
+                    nullable: true
+              - column:
+                  name: STATUS
+                  type: varchar2(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: PROJETO_ID
+                  type: number
+                  constraints:
+                    foreignKeyName: fk_projeto_id
+                    references: "PROJETOS(id)"
+      rollback:
+        - dropTable:
+            tableName: TAREFAS

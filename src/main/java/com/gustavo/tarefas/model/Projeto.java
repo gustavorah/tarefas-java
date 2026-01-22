@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
-@Table(name = "HTE_PROJETOS",
+@Table(name = "PROJETOS",
 schema = "APP_TAREFAS")
 @Getter
 @Setter
@@ -18,12 +18,16 @@ schema = "APP_TAREFAS")
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Projeto {
     @Id @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_projeto")
+    @Column(name = "ID")
     private Long id;
-    @Column(nullable = false)
+    @Column(name = "NOME", nullable = false)
     private String nome;
+    @Column(name = "DESCRICAO")
     private String descricao;
-    private LocalDateTime dt_inicio;
-    private LocalDateTime dt_fim;
+    @Column(name = "DTINICIO")
+    private LocalDateTime dtInicio;
+    @Column(name = "DTFIM")
+    private LocalDateTime dtFim;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
@@ -34,11 +38,11 @@ public class Projeto {
     @JsonManagedReference
     private Set<Tarefa> tarefas;
 
-    public Projeto(String nome, String descricao, LocalDateTime dt_inicio, LocalDateTime dt_fim, Usuario usuario) {
+    public Projeto(String nome, String descricao, LocalDateTime dtInicio, LocalDateTime dtFim, Usuario usuario) {
         this.nome = nome;
         this.descricao = descricao;
-        this.dt_inicio = dt_inicio;
-        this.dt_fim = dt_fim;
+        this.dtInicio = dtInicio;
+        this.dtFim = dtFim;
         this.usuario = usuario;
     }
 }

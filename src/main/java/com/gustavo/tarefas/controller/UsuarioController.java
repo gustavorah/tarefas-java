@@ -1,6 +1,7 @@
 package com.gustavo.tarefas.controller;
 
 import com.gustavo.tarefas.model.Usuario;
+import com.gustavo.tarefas.request.TodoDTO;
 import com.gustavo.tarefas.request.UsuarioDTO;
 import com.gustavo.tarefas.response.UsuarioResponseDTO;
 import com.gustavo.tarefas.service.UsuarioService;
@@ -41,5 +42,10 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id) {
         service.deletar(id);
+    }
+
+    @GetMapping("/rest-test")
+    public List<TodoDTO> testRest() {
+        return service.getTodosRest();
     }
 }

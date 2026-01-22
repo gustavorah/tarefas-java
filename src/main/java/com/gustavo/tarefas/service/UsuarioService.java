@@ -3,11 +3,14 @@ package com.gustavo.tarefas.service;
 import com.gustavo.tarefas.mapper.UsuarioMapper;
 import com.gustavo.tarefas.model.Usuario;
 import com.gustavo.tarefas.repository.UsuarioRepository;
+import com.gustavo.tarefas.request.TodoDTO;
 import com.gustavo.tarefas.request.UsuarioDTO;
 import com.gustavo.tarefas.response.UsuarioResponseDTO;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestClient;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,6 +21,7 @@ import java.util.Optional;
 public class UsuarioService {
     final private UsuarioRepository repository;
     final private UsuarioMapper mapper;
+    final private RestClient restClient;
 
     public List<UsuarioResponseDTO> listarTodos()
     {
@@ -67,5 +71,13 @@ public class UsuarioService {
         return user
                 .map(mapper::usuarioToUsuarioResponseDTO)
                 .orElseThrow(() -> new EntityNotFoundException("Usuário não encontrado"));
+    }
+
+    public List<TodoDTO> getTodosRest() {
+        return restClient
+                .get()
+                .retrieve()
+                .body(new ParameterizedTypeReference<List<TodoDTO>>() {
+                });
     }
 }
